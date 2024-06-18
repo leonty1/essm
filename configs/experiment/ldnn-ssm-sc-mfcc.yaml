@@ -1,0 +1,65 @@
+
+defaults:
+  - /pipeline: sc-mfcc
+  - /model: ldnn-ssm
+#  - override /scheduler: cosine_warmup
+
+model:
+  dropout: 0.1
+  n_layers: 4
+  prenorm: false
+  d_model: 128
+  norm: layer
+  residual: R
+  layer:
+    head: 32
+    bidirectional: true
+    channel: 1
+    conj_sym: true
+    keep_d_state: true
+    discrete_method: zoh  #'zoh'
+    d_s: 128
+    Lambda_init: hippo #hippo #hippo ['uniform', 'kaiming_uniform', 'xavier_uniform', 'normal', 'kaiming_normal', 'xavier_normal', 'trunc_normal', 'zero', 'one', 'half']
+    B_init: hippo #hippo
+    C_init: trunc_normal
+    D_init: one
+    t_init: uniform   #['uniform', 'trunc_normal']
+    dt_min: 0.001
+    dt_max: 0.1
+    d_dt_is_n: true
+    version_A_neg: clip              # constrain A - ['softplus', 'sigmoid', 'Gaussian',  'clip']
+    version_A_imag: same            #['softplus', 'sigmoid', 'Gaussian',  'clip', 'zero', 'negtive', ['identity', None, 'same']]
+    version_B_imag: same
+    version_C_imag: same
+    max_kernel_length:
+    D_value: 1
+    trainable:
+      log_dt: true
+      Lambda: true
+      B: true
+      C: true
+      D: true
+    lr:
+      log_dt: 0.001
+      Lambda: 0.001
+      B: 0.001
+      C: 0.006   # decay 0.08
+      D: 0.001
+    activation:  #leakyrelu #leakyrelu #S5  half_glu2  full_glu   half_glu1
+    acttivation_post: half_glu1  # activation after Mixer
+
+optimizer:
+  lr: 0.006
+
+loader:
+  batch_size: 16      #1560/2185 step for batch=8
+
+trainer:
+  max_epochs: 80
+
+scheduler:
+  patience: 5
+  factor: 0.2
+
+train:
+  seed: 2222

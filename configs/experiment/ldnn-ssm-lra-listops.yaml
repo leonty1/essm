@@ -1,0 +1,66 @@
+# @package _global_
+defaults:
+  - /pipeline: listops
+  - /model: ldnn-ssm
+  - override /scheduler: plateau
+
+model:
+  dropout: 0.
+  n_layers: 8
+  prenorm: true
+  d_model: 128
+  norm: batch
+  residual: R
+  layer:
+    head: 64
+    bidirectional: true
+    channel: 1
+    conj_sym: true
+    keep_d_state: true
+    discrete_method: zoh
+    d_s: 256
+    Lambda_init: hippo
+    B_init: hippo
+    C_init: hippo
+    D_init: one
+    t_init: uniform
+    dt_min: 0.001
+    dt_max: 0.1
+    d_dt_is_n: true
+    version_A_neg: clip
+    max_kernel_length:
+    D_value: 1
+    trainable:
+      log_dt: true
+      Lambda: true
+      B: true
+      C: true
+      D: true
+    lr:
+      log_dt: 0.01
+      Lambda: 0.01
+      B: 0.01
+      C: 0.01
+      D: 0.01
+    activation:
+    acttivation_post: half_glu1
+
+decoder:
+  mode: pool
+
+loader:
+  batch_size: 32
+
+optimizer:
+  lr: 0.01
+
+scheduler:
+  patience: 8
+  factor: 0.4
+
+trainer:
+  max_epochs: 100
+
+
+train:
+  seed: 1122

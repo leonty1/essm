@@ -1,0 +1,67 @@
+
+defaults:
+  - /pipeline: sc-10
+  - /model: ldnn-ssm
+
+
+model:
+  dropout: 0.1
+  n_layers: 6
+  prenorm: true
+  d_model: 128
+  norm: batch
+  residual: R
+  layer:
+    head: 32
+    bidirectional: true
+    channel: 1
+    conj_sym: true
+    keep_d_state: true
+    discrete_method: zoh
+    d_s: 128
+    Lambda_init: hippo
+    B_init: hippo
+    C_init: trunc_normal
+    D_init: one
+    t_init: uniform
+    dt_min: 0.001
+    dt_max: 0.1
+    d_dt_is_n: true
+    version_A_neg: clip
+    version_A_imag: same
+    version_B_imag: same
+    version_C_imag: same
+    max_kernel_length:
+    D_value: 1
+    trainable:
+      log_dt: true
+      Lambda: true
+      B: true
+      C: true
+      D: true
+    lr:
+      log_dt: 0.001
+      Lambda: 0.001
+      B: 0.001
+      C: 0.006   # decay 0.08
+      D: 0.001
+    activation:
+    acttivation_post: half_glu1
+
+optimizer:
+  lr: 0.006
+  weight_decay: 0.08
+
+loader:
+  batch_size: 16
+
+trainer:
+  max_epochs: 150
+
+scheduler:
+  patience: 10
+
+
+train:
+  seed: 2222
+  test: true

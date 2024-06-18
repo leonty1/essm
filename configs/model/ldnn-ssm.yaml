@@ -1,0 +1,15 @@
+# _target_: models.sequence.SequenceModel
+defaults:
+  - layer: ldnn_ssm_layer
+_name_: ldnn_model
+n_layers: 6
+d_model: 128
+transposed: True
+residual: R
+dropout: 0.
+prenorm: True
+norm: layer
+pool:
+  _name_: sample
+  pool: 1
+  expand: 1

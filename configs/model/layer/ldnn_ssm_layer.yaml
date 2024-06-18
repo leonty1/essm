@@ -1,0 +1,32 @@
+_name_: ldnn_multihead_A_complex   #   ldnn_partition  ldnn_multihead_real  ldnn_multihead_complex    ldnn_partition_complex  ldnn_multihead_real_bidirectional  ldnn_multihead_complex_bidirectional
+d_s: 64        #ldnn_multihead_A_complex     s5
+head: 1
+bidirectional: false
+channel: 1
+#activation: None   #leave None unless have to. activation specify in topper level
+discrete_method: zoh
+version_A_neg: clip              # constrain A - ['softplus', 'sigmoid', 'Gaussian',  'clip']
+D_value: 1    #0-without Du，1-skip connection, 2 or others - learn D
+postact: null
+hyper_act: null
+dropout: ${..dropout} # Same as null
+dt_min: 0.001       #range for initialization of dt
+dt_max: 0.1
+trainable:
+    log_dt: true
+    Lambda: true
+    B: true
+lr:
+    log_dt: 0.001
+    Lambda: 0.001
+    B: 0.001
+complex_ssm: False     # delta_t as complex number or not
+conj_sym: True
+keep_d_state: False
+max_kernel_length: null
+Lambda_init: hippo     #hippo, randn正态, uniform均匀分布, half赋值为0.5
+B_init: hippo     #hippo one, randn
+max_real_Lambda: 1e-4
+l_max: ${oc.select:dataset.__l_max,1} # Grab dataset length if exists, otherwise set to 1 and kernel will automatically resize
+verbose: false
+

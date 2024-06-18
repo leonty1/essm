@@ -1,0 +1,78 @@
+
+defaults:
+  - /pipeline: pathx
+  - /model: ldnn-ssm
+  - override /scheduler: cosine_warmup
+
+model:
+  dropout: 0.0
+  n_layers: 6
+  prenorm: true
+  d_model: 192
+  norm: batch
+  residual: R
+  layer:
+    head: 8
+    bidirectional: true
+    channel: 1
+    conj_sym: true
+    keep_d_state: true
+    discrete_method: zoh  #'zoh'
+    d_s: 256
+    Lambda_init: hippo
+    B_init: hippo #hippo
+    C_init: trunc_normal
+    D_init: one
+    t_init: uniform   #['uniform', 'trunc_normal']
+    dt_min: 0.0001
+    dt_max: 0.1
+    d_dt_is_n: true
+    version_A_neg: clip
+    version_A_imag: same
+    version_B_imag: zero
+    version_C_imag: zero
+    max_kernel_length:
+    D_value: 1
+    trainable:
+      log_dt: true
+      Lambda: true
+      B: true
+      C: true
+      D: true
+    lr:
+      log_dt: 0.0005
+      Lambda: 0.0005
+      B: 0.0005
+      C: 0.001
+      D: 0.0005
+    activation:
+    acttivation_post: half_glu1
+
+loader:
+  batch_size: 8
+
+decoder:
+  mode: pool
+
+optimizer:
+  lr: 0.001
+#  weight_decay: 0.1
+
+scheduler:
+#  patience: 10
+#  patience: 2
+#  factor: 0.8
+  num_warmup_steps: 10000
+  num_training_steps: 1000000   #修改为100w
+#  milestones: [40, 60, 75]
+#  gamma: 0.6
+
+
+trainer:
+  max_epochs: 200
+  limit_train_batches: 0.5
+
+
+train:
+  seed: 333
+  interval: step
