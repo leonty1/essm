@@ -1,12 +1,12 @@
-# Linear Dynamics-embedded Neural Network
-![GitHub stars](https://img.shields.io/github/stars/leonty1/DeepLDNN)  ![GitHub forks](https://img.shields.io/github/forks/leonty1/DeepLDNN?color=green)
+# Efficient State Space Model via Fast Tensor Convolution and Block Diagonalization
+![GitHub stars](https://img.shields.io/github/stars/leonty1/essm)  ![GitHub forks](https://img.shields.io/github/forks/leonty1/essm?color=green)
 
 This repository contains the implementation code for paper:
 
-> **Linear Dynamics-embedded Neural Network for Long-Sequence Modeling**\
+> **Efficient State Space Model via Fast Tensor Convolution and Block Diagonalization**\
 > [Tongyi Liang](https://github.com/leonty1.html), [Han-Xiong Li](https://scholar.google.com/citations?user=tnnePQwAAAAJ.html).\
-> Appendix Preprint: https://arxiv.org/abs/2402.15290 \
-> Under Review by IEEE, 2024. 
+> Preprint: https://arxiv.org/abs/2402.15290 \
+> Under Review by Elsevier, 2024. 
 
 ## Graph Abstract
 <p align="center">
@@ -24,8 +24,6 @@ Our code is developed based on S4 work ([paper](https://arxiv.org/abs/2111.00396
 
 ### Requirements
 This repository requires Python 3.8+ and Pytorch 2.0+. Please be careful about the PyTorch and python version, and all other packages can be installed via `pip install -r requirements.txt` or 'conda env create -f environment.yaml'.
-
-Set 'os.environ\["PL_TORCH_DISTRIBUTED_BACKEND"] = "gloo" ' for windows environment, and 'os.environ\["PL_TORCH_DISTRIBUTED_BACKEND"] = "nccl" ' for Linux in 'train.py''.
 
 Our code can also work at [dss](https://github.com/state-spaces/s4) environment by putting our model into corresponding folders. 
 
