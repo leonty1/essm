@@ -10,7 +10,7 @@ This repository contains the implementation code for paper:
 
 ## Graph Abstract
 <p align="center">
-    <img src="essm_internal_structure.pdfg" width="1600"> <br>
+    <img src="essm_internal_structure.png" width="1600"> <br>
 </p>
 
 ## Table of Contents
@@ -38,7 +38,7 @@ Run experiments with command like 'python -m train wandb=null experiment=ldnn-ss
 Our LDNN is buildt on state space model with multi-input and multi-output. The follow figure shows the comparison of computational flow of S4 ([paper](https://arxiv.org/abs/2111.00396)), S5([paper](https://arxiv.org/abs/2208.04933)) and LDNN
 
 <p align="center">
-    <img src="essm_fig_computational_flow.pdf" width="1600"> <br>
+    <img src="essm_fig_computational_flow.png" width="1600"> <br>
 </p>
 
 ## Contact
